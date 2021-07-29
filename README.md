@@ -1,17 +1,19 @@
 # Scrapping_MktySofifa
-El siguiente repositorio, consiste en la extracción de información de la seleccion chilena de futbol vs la seleccion chilena mostrada en el juego FIFA de información extraida por dos paginas web. Con el objetivo de identificar si el juego muestra exactamente la realidad. Estudio realizado por: Denilson Echeverria y Amira Pérez
+El siguiente repositorio, consiste en la extracción de información de la seleccion chilena de futbol vs la seleccion chilena mostrada en el juego FIFA. Esta informacion extraida por dos paginas web. Con el objetivo de identificar si el juego muestra exactamente la realidad de los jugadores.
 
 
-En los siguientes sitios web aparece informacion acerca de los jugadores de la selecion chilena. 
+En los siguientes sitios web extraeremos la información necesaria para la investigación. 
 
-#https://www.transfermarkt.es/chile/kader/verein/3700/saison_id/2020
-#https://sofifa.com/team/111459/chile/?hl=es-ES
 
-#La primera pagina web, muestra informacion acerca de los jugadores
-#en la vida real.
+La primera pagina web, muestra informacion acerca de los jugadores en la vida real. 
+https://www.transfermarkt.es/chile/kader/verein/3700/saison_id/2020
 
-#La segunda pagina web, muestra informaciÃ³n de los jugadores 
-#en el juego FIFA.
+La segunda pagina web, muestra informacion de los jugadores en el juego de play  FIFA.
+
+https://sofifa.com/team/111459/chile/?hl=es-ES
+
+
+
 
 
 ##Instalando paqueteria
