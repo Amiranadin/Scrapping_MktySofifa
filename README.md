@@ -257,7 +257,7 @@ plot(SOFDATAFINAL$EDADJUGADORSOF, SOFDATAFINAL$VALORMERCADOSOF,col="GREEN",xlab=
 
 Se termina la fase anterior y se procede a realizar funciones.
 
-### FUNCIONES IF/ELSE/PRINT ###
+### Funciones if/else/print ###
 
 summary(MKTDATAFINAL)
 summary(SOFDATAFINAL)
