@@ -29,7 +29,7 @@ library(dplyr)
 
 Luego, el primer paso es realizar la extracion de informacion de la primera mpagina web llamada: Transfermarkt. Es decir, se designa por nombre chimkt y se utiliza el comando real_html para poder leer la pagina web.
 
-##Primera pagina web##
+## Primera pagina web ##
 
 Abiendo pagina web:
 
