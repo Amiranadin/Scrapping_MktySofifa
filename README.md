@@ -99,20 +99,19 @@ View(MKTDATAFINAL)
 Finalizada la extraccion y la limpieza de la primera pagina web, se procede a la segunda fase, que consiste en la extraccion de informacion de la segunda pagina web
 .
 
-### SEGUNDA PAGINA WEB ###
+### Segunda pagina web ###
 
-
-
-#se procede a extraer la informaciÃ³n de la segunda pagina web
-
+Se procede a extraer la informacion de la segunda pagina web, con la asignacion chisof y el comando read_html para permitir que el programa leea la pagina en el comando.
 
 chisof <- read_html("https://sofifa.com/team/111459/chile/?hl=es-ES")
+
+Se utiliza el comando print, para que el programa nos imprima la informacion  de la pagina web.
 
 
 print(html_text(chisof))
 
-#Para extraer la informaciÃ³n se utiliza la class "list", debido a que al igual
-#que nuestra primera pagina, no poseen ID.
+Para extraer la informacion se utiliza la class "list", debido a que al igual que nuestra primera pagina, no poseen ID. y se utilizan los comandos html_nodes y html_table
+
 
 TABLAjugadoresSOF <- html_nodes(chisof,css = ".list")
 
@@ -123,8 +122,10 @@ SOFjugadoresLIMPIO <- html_table(TABLAjugadoresSOF)[[1]]
 
 print(html_text(TABLAjugadoresSOF[[1]]))
 
-#Se procede a limpiar la data, es decir las columnas debido a que la data 
-#tablajudaoressof es una data sucia, que no servira para el objetivo final
+
+Se procede a limpiar la data. Es decir las columnas debido a que la data tablajudaoressof es una data sucia, que no servira para el objetivo final
+
+Con los siguiente comandos se elimminas las columnas:
 
 SOFjugadoresLIMPIO["X1"] = NULL
 SOFjugadoresLIMPIO["X4"] = NULL
@@ -136,8 +137,7 @@ SOFjugadoresLIMPIO["X10"] = NULL
 names(SOFjugadoresLIMPIO)= c("NOMBRE", "EDAD", "POSICION", "VALOR DE MERCADO")
 
 
-#Data final limpia debido a que el precio de valor de mercado estaba en formato
-#numerico y texto. Se repite procedimiento a la primera pagina.
+Data final limpia debido a que el precio de valor de mercado estaba en formato umerico y texto. Se repite procedimiento a la primera pagina.
 
 
 EDADJUGADORSOF = SOFjugadoresLIMPIO$EDAD
@@ -152,16 +152,18 @@ VALORMERCADOSOFNUMERICO <- as.numeric(VALORMERCADOSOF)
 
 SOFDATAFINAL = data.frame(EDADJUGADORSOF,NOMBREJUGADORSOF,VALORMERCADOSOFNUMERICO)
 
-#Visualizacion de la data limpia.
+
+
+Finalizada la limpieza, visualizamos utilizando view la data final de la pagina SOFIFA.
 
 View(SOFDATAFINAL)
 
+Finalmente, tenemos ambas paginas web con la informacion necesaria y extraida, por lo que se procede a respaldas archivos en formato csv.
 
-####################  PASO 3 ########################
-#         RESPALDAR ARCHIVO EN FORMATO CSV          #
+### Respaldar archivo en formato csv ###
 
 
-####LUEGO DE LIMPIAR LA DATA SE PROCEDE A RESPALDAR LOS ARCHIVOS EN FORMATO CSV###
+Con los siguientes comandos:
 
 setwd("C:/Users/Amira/Documents/Scrapping_futbol")
 write.csv(MKTjugadoresLIMPIO, file = "DATA_SELECCION_CHILENA_TRANSFERMKT.csv")
@@ -171,48 +173,46 @@ setwd("C:/Users/Amira/Documents/Scrapping_futbol")
 write.csv(SOFjugadoresLIMPIO, file = "DATA_SELECCION_CHILENA_SOFIFA.csv")
 
 
-####################  PASO 4 ########################
-#   EXPLORACION Y VISUALIZACION DE DATA Y TABLAS    #
+Posterior al respaldo de los archivos se comienza la siguiente etapa llamada:
+
+### Exploracion y visualizacion de data y tablas ###
+
+En grandes ragos, podemos concluir que los datas frames realizados corresponden a los jugadores de la seleccion chile en la vida real y en el juego fifa.
+
+Se procede a explorar las tablas con el comando table() con las variables extraidas
 
 
-
-#En grandes ragos, podemos concluir que los datas frames realizados 
-#corresponden a los jugadores de la seleccion chile en la vida real y en
-#el juego fifa.
-
-
-#Se procede a explorar las tablas con el comando table() con las variables extraidas
-
-
-#Tablas de los jugadores en la realidad.
+Tablas de los jugadores en la realidad.
 
 table(MKTDATAFINAL$EDADJUGADORMKT)
 table(MKTDATAFINAL$NOMBREJUGADORMKT)
 table(MKTDATAFINAL$VALORMERCADOMKT)
 
-#Tablas de los jugadores en el juego FIFA.
+Tablas de los jugadores en el juego FIFA.
 
 table(SOFDATAFINAL$EDADJUGADORSOF)
 table(SOFDATAFINAL$NOMBREJUGADORSOF)
 table(SOFDATAFINAL$VALORMERCADOSOF)
 
 
-####################  PASO 5 ########################
-#             REGRESIONES/GRAFICOS/ESTADISTICA      #
+Se procede a la siguiente etapa:
 
-#             PAGINA TRANSFEMKT                     #
+### Regresiones y graficos ###
+
+###PAGINA TRANSFEMKT ###
 
 
-
-#Tabla de los jugadores de la seleccion chilena
-#esta compuesto por 23 jugadores,con su respectivo valor de mercado en la vida real
+La tabla de los jugadores de la seleccion chilena esta compuesto por 23 jugadores,con su respectivo valor de mercado en la vida real
 
 table(MKTDATAFINAL$VALORMERCADOMKT)
 
+Se procede a realizar regresion lineal con la vribles edad y valor de mercado y al aplicar el summary podemos determinar si las variables son significativas y si son consistentes al modelo
 
 Regresion1 <- lm(EDADJUGADORMKT ~ VALORMERCADOMKT, data = MKTDATAFINAL)
 
 summary(Regresion1)
+
+Con los siguientes comandos podemos visualizar el comportamiento de las variables.
 
 plot(MKTDATAFINAL$EDADJUGADORMKT, MKTDATAFINAL$VALORMERCADOMKT, xlab='EDADJUGADOMKT', ylab='VALORMERCADOMKT') 
 
@@ -221,7 +221,7 @@ abline(Regresion1)
 plot(MKTDATAFINAL$EDADJUGADORMKT, MKTDATAFINAL$VALORMERCADOMKT,col="RED",xlab="EDADJUGADOMKT",ylab="VALORMERCADOMKT",type="p")
 
 
-#Otros graficos
+Otros graficos
 
 grafica1= ggplot(MKTDATAFINAL, aes(VALORMERCADOMKT,EDADJUGADORMKT))
 
@@ -229,20 +229,24 @@ grafica1 + geom_point()
 
 ggplot(MKTDATAFINAL,aes(x=VALORMERCADOMKT)) + geom_bar(fil="Red")
 
-
-####################  PASO 6 ########################
-#             REGRESIONES/GRAFICOS/ESTADISTICA      #
-
-#             PAGINA SOFIFA                     #
+Finalizadndo los graficos y las regresiones se procede a realizar el mismo procedimiento con la siguiente pagina.
 
 
-#Esta tabla esta compuesto tambien por 23 jugadores de la seleccion chilena con su respectivo valor de mercado.
+
+### Regresiones y graficos ###
+
+###PAGINA SOFIFA ###
+
+Esta tabla esta compuesto tambien por 23 jugadores de la seleccion chilena con su respectivo valor de mercado. 
+Se procede a realizar la segunda regresion, con el objetivo similar al paso anterior de verificar si el modelo es significativo en las mismas variables, edad y valor de mercado pero en el juego FIFA.
 
 table(SOFDATAFINAL$VALORMERCADOSOF)
 
 Regresion2 <- lm(EDADJUGADORSOF ~ VALORMERCADOSOF, data = SOFDATAFINAL)
 
 summary(Regresion2)
+
+Se aplica los siguientes graficos, con el objetivo de visualizar el comportamiento de las variables
 
 plot(SOFDATAFINAL$EDADJUGADORSOF, SOFDATAFINAL$VALORMERCADOSOF, xlab='EDADJUGADORSOF', ylab='VALORMERCADOSOF') 
 
@@ -251,8 +255,9 @@ abline(Regresion2)
 plot(SOFDATAFINAL$EDADJUGADORSOF, SOFDATAFINAL$VALORMERCADOSOF,col="GREEN",xlab="EDADJUGADORSOF",ylab="VALORMERCADOSOF",type="p")
 
 
-####################  PASO 7 ########################
-#                FUNCIONES                          #
+Se termina la fase anterior y se procede a realizar funciones.
+
+### FUNCIONES IF/ELSE/PRINT ###
 
 summary(MKTDATAFINAL)
 summary(SOFDATAFINAL)
@@ -277,49 +282,41 @@ if (vmercadomkt > vmercadosof){
   print ("El valor de mercado de la seleccion chilena es menor en la vida real")
 }
 
-
-####################  PASO 8 ########################
-#           PREGUNTAS EFECTUADAS DEL PROYECTO      #
-
-
-#Efectivamente el valor de mercado depende de la edad del jugador en el caso de MKT Y SOFIFA?
-
-#Debido a los graficos demostrados en el paso 5. Que muestra los jugadores de la seleccion chilena
-#en base a la realidad. Se puede concluir que el modelo se ajusta a un 90% 
-#en proporcion a los datos en torno a la media. Podemos visualizar que es un buen indicador
-#pero sin embargo, Ademas podemos determinarf que  su diagrama de dispersion sus variables no son variables significativas.
-
-
-#por otro lado para el caso de sofifa, en los graficos representado en el paso 6, que muestra los jugadores
-#de la seleccion chilena en base al juego de play FIFA. 
-#podemos concluir quee el modelo se ajusta a un 94% pero no es un modelo signficativo o de confianza por el coeficiente de correlacion.
+Se puede concluir con la primera funcion que: "El promedio de edad de la seleccion chilena es mayor a la vida real "
+con la segunda funcion se concluye que: "El valor de mercado de la seleccion chilena es menor en la vida real"
 
 
 
-
-#Los datos del juego fifa se asemejan a la realidad de los jugadores?
-#a traves de la extraccion de tablas e informacion de ambas paginas 
-#podemos evidenciar que ambas paginas muestran los mismos 23 jugadores de la seleccion chilena
-#sin embargo, el valor de mercado que muestra el juego fifa es mas sobrevalorado que el real por lo que
-#no son semejantes.
+### Preguntas efectuadas del proyecto ###
 
 
-#La informacion es sesgada?
-# Efectivamente la informacion es sesgada, debido a la poca extraccion de informacion de las paginas web
-# y debido a las variables que se tomaron. 
+¿Efectivamente el valor de mercado depende de la edad del jugador en el caso de MKT Y SOFIFA?
 
-#Que modificaciones habria que añadir el modelo?
-#Un mejor manejo en el lenguaje R, ayudaria a extraer de mejor manera mucho mas informacion de las tablas
-#ademas, de añadir mas variables como la posicion o campeonatos ganados.
+Debido a los graficos demostrados en el paso 5. Que muestra los jugadores de la seleccion chilena en base a la realidad. Se puede concluir que el modelo se ajusta a un 90%  en proporcion a los datos en torno a la media. Podemos visualizar que es un buen indicador pero sin embargo, Ademas podemos determinarf que  su diagrama de dispersion sus variables no son variables significativas.
+
+
+Por otro lado para el caso de sofifa, en los graficos representado en el paso 6, que muestra los jugadores de la seleccion chilena en base al juego de play FIFA.  podemos concluir quee el modelo se ajusta a un 94% pero no es un modelo signficativo o de confianza por el coeficiente de correlacion.
 
 
 
-####################  PASO 9 ########################
-#                     Conclusiones                  #
+¿Los datos del juego fifa se asemejan a la realidad de los jugadores?
+
+A traves de la extraccion de tablas e informacion de ambas paginas  podemos evidenciar que ambas paginas muestran los mismos 23 jugadores de la seleccion chilena. Sin embargo, el valor de mercado que muestra el juego fifa es mas sobrevalorado que el real por lo que no son semejantes.
 
 
-#En conclusion, en terminos de extraccion de informacion a traves del programa r estudio, se cumple con el objetivo. 
-#Sin embargo, consideramos que el modelo no es significativo debido a que su inforfmacion
-#es mus sesgada y de muy pocas variables. Pero podemos determinar que el juego FIFA, efectivamente
-#muestra en sus totalidad a la seleccion chilena, con sus nombre correspondiente y que el valor de mercado del juego esta sobrevalorado
-#por el valor de mercado en la vida real de los jugadores.
+¿La informacion es sesgada?
+
+Efectivamente la informacion es sesgada, debido a la poca extraccion de informacion de las paginas web y debido a las variables que se tomaron. 
+
+¿Que modificaciones habria que añadir el modelo?
+
+Un mejor manejo en el lenguaje R, ayudaria a extraer de mejor manera mucho mas informacion de las tablas. Ademas, de añadir mas variables como la posicion o campeonatos ganados.
+
+
+
+### Conclusiones ###
+
+
+En conclusion, en terminos de extraccion de informacion a traves del programa r estudio, se cumple con el objetivo. 
+Sin embargo, consideramos que el modelo no es significativo debido a que su inforfmacion es mus sesgada y de muy pocas variables. Pero podemos determinar que el juego FIFA, efectivamente muestra en sus totalidad a la seleccion chilena, con sus nombre correspondiente y que el valor de mercado del juego esta sobrevalorado por el valor de mercado en la vida real de los jugadores.
+
