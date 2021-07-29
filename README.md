@@ -29,7 +29,7 @@ library(dplyr)
 
 Luego, el primer paso es realizar la extracion de informacion de la primera mpagina web llamada: Transfermarkt. Es decir, se designa por nombre chimkt y se utiliza el comando real_html para poder leer la pagina web.
 
-## Primera pagina web ##
+### Primera pagina web ###
 
 Abiendo pagina web:
 
@@ -73,28 +73,33 @@ MKTjugadores["7"] = NULL
 
 MKTjugadoresLIMPIO <- na.omit(MKTjugadores)
 
-#Para realizar el analisis de los jugadores, evidenciamos que el valor de mercado de la tabla 
-#esta sucio debido a que es un formato texto y numerico.
-#Necesitamos que sea en formato numerico, para un analisis mas especifico.
+Para realizar el analisis de los jugadores, evidenciamos que el valor de mercado de la tabla esta sucia debido a que es un formato texto y numerico y Necesitamos que sea en formato numerico, para un analisis mas especifico.
 
 
-#Formato final de la tabla
+Ahora asignamos el formato final de la tabla
+
+
+Con los siguientes comandos:
 
 EDADJUGADORMKT = MKTjugadoresLIMPIO$EDAD
+
 NOMBREJUGADORMKT = MKTjugadoresLIMPIO$NOMBRE
+
 VALORMERCADOMKT = c("3800000","1000000","450000","12000000","6000000","2000000","1500000","500000","1800000","950000","9000000","4000000","3100000","1500000","1000000","6000000","3500000","800000","1400000","900000","5000000","850000","2000000","3000000","7500000","7000000","4000000","600000","25000")
+
 VALORMERCADOMKTNUMERICO <- as.numeric(VALORMERCADOMKT)
 
 MKTDATAFINAL = data.frame(EDADJUGADORMKT,NOMBREJUGADORMKT,VALORMERCADOMKTNUMERICO)
 
-##Visualizando data final##
+
+Para confirmar si la data esta el formato correcto y en el que necesitamos, visualizamos la tabla MKTDATA FINAL CON el comando view mostrado a continuacion:
 
 View(MKTDATAFINAL)
 
+Finalizada la extraccion y la limpieza de la primera pagina web, se procede a la segunda fase, que consiste en la extraccion de informacion de la segunda pagina web
+.
 
-
-####################  PASO 2 ########################
-#               SEGUNDA PAGINA WEB                  #
+### SEGUNDA PAGINA WEB ###
 
 
 
