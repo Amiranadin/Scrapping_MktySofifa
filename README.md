@@ -13,11 +13,10 @@ La segunda pagina web, muestra informacion de los jugadores en el juego de play 
 https://sofifa.com/team/111459/chile/?hl=es-ES
 
 
+Para iniciar la investigacion en el programa, lo primero fue instalar las siguientes paqueterias, para poder utilizar ciertos comandos a medida que la investigacion avanza.
 
 
-
-##Instalando paqueteria
-
+Commands:
 
 library("rvest")
 install.packages("readxl")
@@ -28,31 +27,24 @@ library(dplyr)
 
 
 
-####################  PASO 1 ########################
-#               PRIMERA PAGINA WEB                  
-#
+Luego, el primer paso es realizar la extracion de informacion de la primera mpagina web llamada: Transfermarkt. Es decir, se designa por nombre chimkt y se utiliza el comando real_html para poder leer la pagina web.
 
 
-
-#Abriendo la primera pagina web Transfermrkt
+Abiendo pagina web:
 
 chimkt <- read_html("https://www.transfermarkt.es/chile/kader/verein/3700/saison_id/2020")
 
-#Revisando el contenido de la pagina
+A continuacion, se utiliza el print para imprimir y verifica si efectivamente nos muestra la pagina web.
+
 
 print(html_text(chimkt))
 
 
-#Se comienza a navegar en la pagina web, con el objetivo de extraer informacion
-#de los jugadores en la vida real. Aqui encontramos el nombre del futbolista,
-#edad y valor de mercado
+En segundo lugar, se comienza a navegar en la pagina web, con el objetivo de extraer informacion de los jugadores en la vida real. Aqui encontramos el nombre del futbolista, edad y valor de mercado
 
 chimkt <- read_html("https://www.transfermarkt.es/chile/kader/verein/3700/saison_id/2020")
 
-#Para extraer la informacion de la tabla de la pagina web, se realiza con el class "items" debido
-#a que la pagina web, no posee atributo id.
-#Se utilizan los comandos html_table para la extraccion directa
-# y html_nodes para extraccion con nodos
+Para extraer la informacion de la tabla de la pagina web, se realiza con el class "items" debido a que la pagina web, no posee atributo id. Se utilizan los comandos html_table para la extraccion directa  y html_nodes para extraccion con nodos
 
 TABLAjugadores <- html_nodes(chimkt,css = ".items")
 
@@ -62,13 +54,17 @@ MKTjugadores <- html_table(TABLAjugadores)[[1]]
 print(html_text(TABLAjugadores[1]))
 
 
-#La tabla de jugadores extraida, es una data sucia debido a los nombre de los encabezados se extrajeron 
-#desordenados, por lo que asignamos siguientes nombres a los encabezados con el fin de ordenarlos y limpiarlo
+La tabla de jugadores extraida en el punto anterior, es una data sucia debido a que los nombre de los encabezados se extrajeron desordenados, por lo que asignamos siguientes nombres a los encabezados con el fin de ordenarlos y limpiarlo.
+
+
+Con estos comandos, asignamos con nombre, posicion, edad, valor de mercado a las columnas que aportarian a la investigacion y a las colummnas que necesitamos eliminar les asignamos un numero, para asi posteriormente poder eliminar la colummna, ya que su contenido estaba sucio y en formato nulo.
 
 names(MKTjugadores)= c("DORSAL", "2", "3", "NOMBRE", "POSICION", "EDAD", "7", "VALOR DE MERCADO")
 
-#Posterior a la asignaciÃ³n de nombres, eliminamos las columnas 2,3,7 para que finalmente nos quedaran
-#solamente las que nos sirven
+Posterior a la asignacion de nombres, eliminamos las columnas 2,3,7 para que finalmente nos quedaran olamente las que nos sirven
+
+
+Comandos para eliminar columnas 2.3 y 7.
 
 MKTjugadores["2"] = NULL
 MKTjugadores["3"] = NULL
