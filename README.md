@@ -2,8 +2,7 @@
 El siguiente repositorio, consiste en la extracción de información de la seleccion chilena de futbol vs la seleccion chilena mostrada en el juego FIFA de información extraida por dos paginas web. Con el objetivo de identificar si el juego muestra exactamente la realidad. Estudio realizado por: Denilson Echeverria y Amira Pérez
 
 
-#En los siguientes sitios web aparece informacion
-#acerca de los jugadores de la selecion chilena. 
+En los siguientes sitios web aparece informacion acerca de los jugadores de la selecion chilena. 
 
 #https://www.transfermarkt.es/chile/kader/verein/3700/saison_id/2020
 #https://sofifa.com/team/111459/chile/?hl=es-ES
