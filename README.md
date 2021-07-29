@@ -2,18 +2,18 @@
 El siguiente repositorio, consiste en la extracción de información de la seleccion chilena de futbol vs la seleccion chilena mostrada en el juego FIFA. Esta informacion extraida por dos paginas web. Con el objetivo de identificar si el juego muestra exactamente la realidad de los jugadores.
 
 
-En los siguientes sitios web extraeremos la información necesaria para la investigación. 
+En los siguientes sitios web extraeremos la información necesaria para la investigación acerca de los jugadores de la seleccion chilena.
 
 
 La primera pagina web, muestra informacion acerca de los jugadores en la vida real. 
 https://www.transfermarkt.es/chile/kader/verein/3700/saison_id/2020
 
-La segunda pagina web, muestra informacion de los jugadores en el juego de play  FIFA.
+La segunda pagina web, muestra informacion de los jugadores en el juego de play mas conocido como FIFA.
 
 https://sofifa.com/team/111459/chile/?hl=es-ES
 
 
-Para iniciar la investigacion en el programa, lo primero fue instalar las siguientes paqueterias, para poder utilizar ciertos comandos a medida que la investigacion avanza.
+Para iniciar la investigacion, primero se debe instalar las siguientes paqueterias, para poder utilizar ciertos comandos.
 
 
 Commands:
@@ -27,7 +27,7 @@ library(dplyr)
 
 
 
-Luego, el primer paso es realizar la extracion de informacion de la primera mpagina web llamada: Transfermarkt. Es decir, se designa por nombre chimkt y se utiliza el comando real_html para poder leer la pagina web.
+Luego, el primer paso es realizar la extracion de informacion de la primera pagina web llamada: Transfermarkt. Es decir, se designa por nombre chimkt y se utiliza el comando real_html para poder leer la pagina web.
 
 ### Primera pagina web ###
 
@@ -35,7 +35,7 @@ Abiendo pagina web:
 
 chimkt <- read_html("https://www.transfermarkt.es/chile/kader/verein/3700/saison_id/2020")
 
-A continuacion, se utiliza el print para imprimir y verifica si efectivamente nos muestra la pagina web.
+A continuacion, se utiliza el print para imprimir y verificar si efectivamente nos muestra la pagina web.
 
 
 print(html_text(chimkt))
@@ -62,7 +62,7 @@ Con estos comandos, asignamos con nombre, posicion, edad, valor de mercado a las
 
 names(MKTjugadores)= c("DORSAL", "2", "3", "NOMBRE", "POSICION", "EDAD", "7", "VALOR DE MERCADO")
 
-Posterior a la asignacion de nombres, eliminamos las columnas 2,3,7 para que finalmente nos quedaran olamente las que nos sirven
+Posterior a la asignacion de nombres, eliminamos las columnas 2,3,7 para que finalmente nos quedaran solamente las columnas que nos sirven
 
 
 Comandos para eliminar columnas 2.3 y 7.
@@ -199,7 +199,7 @@ Se procede a la siguiente etapa:
 
 ### Regresiones y graficos ###
 
-###PAGINA TRANSFEMKT ###
+### PAGINA TRANSFEMKT ###
 
 
 La tabla de los jugadores de la seleccion chilena esta compuesto por 23 jugadores,con su respectivo valor de mercado en la vida real
@@ -235,7 +235,7 @@ Finalizadndo los graficos y las regresiones se procede a realizar el mismo proce
 
 ### Regresiones y graficos ###
 
-###PAGINA SOFIFA ###
+### PAGINA SOFIFA ###
 
 Esta tabla esta compuesto tambien por 23 jugadores de la seleccion chilena con su respectivo valor de mercado. 
 Se procede a realizar la segunda regresion, con el objetivo similar al paso anterior de verificar si el modelo es significativo en las mismas variables, edad y valor de mercado pero en el juego FIFA.
