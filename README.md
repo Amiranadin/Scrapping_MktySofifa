@@ -319,4 +319,4 @@ Un mejor manejo en el lenguaje R, ayudaria a extraer de mejor manera mucho mas i
 
 En conclusion, en terminos de extraccion de informacion a traves del programa r estudio, se cumple con el objetivo. 
 Sin embargo, consideramos que el modelo no es significativo debido a que su inforfmacion es mus sesgada y de muy pocas variables. Pero podemos determinar que el juego FIFA, efectivamente muestra en sus totalidad a la seleccion chilena, con sus nombre correspondiente y que el valor de mercado del juego esta sobrevalorado por el valor de mercado en la vida real de los jugadores.
-
+Para el acceso del video explicativo dirigirse al links que se presenta a continuación https://youtu.be/hazUwf09Lq0
